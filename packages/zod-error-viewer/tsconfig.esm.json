@@ -1,0 +1,13 @@
+{
+  "extends": ["./tsconfig.json"],
+  "compilerOptions": {
+    "outDir": "./dist/esm",
+    "noEmit": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "sourceMap": true
+  },
+  "exclude": ["**/*.stories.tsx", "**/*.test.tsx"]
+}
