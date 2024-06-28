@@ -84,7 +84,7 @@ export function PlaygroundPage() {
 
   return (
     <div className="playground">
-      <h1>Playground</h1>
+      <h1>Playgrounds</h1>
       <div
         style={{
           display: "flex",
@@ -94,7 +94,7 @@ export function PlaygroundPage() {
       >
         <section className="editor-column" aria-labelledby="data-heading">
           <div className="editor">
-            <h2 id="data-heading">DATA</h2>
+            <h2 id="data-heading">DATA </h2>
             <CodeMirror
               value={dataStr}
               height="300px"
