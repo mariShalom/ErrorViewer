@@ -6,35 +6,35 @@ import { z } from "zod";
 import "./PlaygroundPage.css";
 
 export function PlaygroundPage() {
-  const [dataStr, setDataStr] = useState("");
-  const [errorStr, setErrorStr] = useState("");
-  const [schemaStr, setSchemaStr] = useState("");
+  const [dataStri, setDataStr] = useState("");
+  const [errorStri, setErrorStr] = useState("");
+  const [schemaStri, setSchemaStr] = useState("");
 
   const { data, dataParseError } = useMemo(() => {
-    if (dataStr.trim().length === 0) {
+    if (dataStri.trim().length === 0) {
       return {
         data: null,
       };
     }
     try {
-      return { data: JSON.parse(dataStr) };
+      return { data: JSON.parse(dataStri) };
     } catch (err) {
       return {
         data: null,
         dataParseError: err instanceof Error ? err : new Error("Unknown error"),
       };
     }
-  }, [dataStr]);
+  }, [dataStri]);
 
   const { schema, schemaEvalError } = useMemo(() => {
     try {
       Object.assign(window, { z });
-      const schema = eval(`const z = window.z; ${schemaStr}`);
+      const schema = eval(`const z = window.z; ${schemaStri}`);
       if (!schema || !("_def" in schema)) {
         return {
           schema: null,
           schemaEvalError:
-            (schemaStr || "").trim().length > 0
+            (schemaStri || "").trim().length > 0
               ? new Error("Missing schema")
               : null,
         };
@@ -50,12 +50,12 @@ export function PlaygroundPage() {
           err instanceof Error ? err : new Error("Unknown error"),
       };
     }
-  }, [schemaStr]);
+  }, [schemaStri]);
 
   const { error, errorParseError, schemaExecuteError } = useMemo(() => {
-    if (errorStr.trim().length !== 0) {
+    if (errorStri.trim().length !== 0) {
       try {
-        return { error: JSON.parse(errorStr) };
+        return { error: JSON.parse(errorStri) };
       } catch (err) {
         return {
           error: undefined,
@@ -80,11 +80,11 @@ export function PlaygroundPage() {
           err instanceof Error ? err : new Error("Unknown error"),
       };
     }
-  }, [errorStr, schema, data]);
+  }, [errorStri, schema, data]);
 
   return (
     <div className="playground">
-      <h1>Playground</h1>
+      <h1>Playgrounds</h1>
       <div
         style={{
           display: "flex",
@@ -94,9 +94,9 @@ export function PlaygroundPage() {
       >
         <section className="editor-column" aria-labelledby="data-heading">
           <div className="editor">
-            <h2 id="data-heading">DATA</h2>
+            <h2 id="data-heading">DATA </h2>
             <CodeMirror
-              value={dataStr}
+              value={dataStri}
               height="300px"
               extensions={[javascript()]}
               onChange={setDataStr}
@@ -119,7 +119,7 @@ export function PlaygroundPage() {
               <span className="tag">Optional</span>
             </h2>
             <CodeMirror
-              value={errorStr}
+              value={errorStri}
               height="300px"
               extensions={[javascript()]}
               onChange={setErrorStr}
@@ -143,7 +143,7 @@ export function PlaygroundPage() {
               <span className="tag">Optional</span>
             </h2>
             <CodeMirror
-              value={schemaStr}
+              value={schemaStri}
               height="300px"
               extensions={[javascript()]}
               onChange={setSchemaStr}
